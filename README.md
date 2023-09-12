@@ -37,3 +37,10 @@ Setelah selesai melakukan konfigurasi, _commit_ dan _push_ terhadap proyek, saya
 
 ### Buatlah bagan yang berisi _request_ client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `html`.
 ![Pipeline MVT](mvt_pipeline.png)
+
+### Jelaskan mengapa kita menggunakan **_virtual environment_**? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan **_virtual environment_**?
+Kita perlu menggunakan atau mengaktivasi _virtual environment_ ketika ingin mengembangkan suatu proyek agar perubahan yang kita lakukan terhadap sistem, seperti perubahan _dependencies_, tidak mempengaruhi _dependencies_ pada proyek. Contoh lain, bila kita ingin membuat beberapa proyek, kita harus mengaktivasi _virtual environment_ untuk masing-masing proyek agar perbedaan antara versi Python atau _dependencies_ yang dimiliki oleh setiap proyek tidak saling mempengaruhi satu dengan lainnya. \
+
+Aplikasi web berbasis Django tetap dapat dibuat tanpa menggunakan _virtual environment_, namun akan muncul beberapa konflik antara _dependencies_ dari berbagai macam proyek Django. Contohnya, pembuatan proyek tanpa menggunakan _virtual environment_ akan mengakibatkan suatu proyek menggunakan _dependencies_ yang sama dengan proyek lainnya atau yang berada pada sistem. Kita tentu tidak akan mengingat _dependencies_ apa saja yang kita butuhkan untuk proyek dan harus menggunakan semua _dependencies_ yang dibutuhkan dan yang tidak dibutuhkan. Jadi, meskipun proyek tetap dapat dikembangkan tanpa mengaktivasi _virtual environment_, tetapi akan sangat memperlambat pengerjaan.
+
+### Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
