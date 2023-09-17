@@ -13,6 +13,7 @@ def show_main(request):
         'app_name': 'bicycleparts-inv',
         'name': 'Vincent Suhardi',
         'class': 'PBP F',
+        'item_count': len(items),
         'items': items
     }
 
