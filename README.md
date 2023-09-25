@@ -4,6 +4,7 @@ Nama    : Vincent Suhardi \
 NPM     : 2206082505 \
 Kelas   : PBP F
 
+
 ## Tugas 2
 ### Jelaskan bagaimana cara kamu mengimplementasikan __checklist__ di atas secara __step-by-step__ (bukan hanya sekedar mengikuti tutorial).
 
@@ -51,6 +52,7 @@ Aplikasi web berbasis Django tetap dapat dibuat tanpa menggunakan _virtual envir
 
 Perbedaan utama dari ketiganya adalah bagaimana komponen _Model_ dan _View_ saling terhubung untuk mengakses data dan menampilkan suatu tampilan bagi pengguna sesuai dengan data yang di-_query_.
 
+
 ## Tugas 3
 ### Apa perbedaan antara form `POST` dan `GET` dalam Django?
 `POST` merupakan segala _request_ yang dapat menambahkan, menghapus, atau merubah keadaan pada server, contohnya penambahan data baru pada database. Sedangkan `GET` juga merupakan suatu _request_ tetapi hanya bertujuan untuk mengambil atau menerima data dan tidak melakukan perubahan terhadap server.
@@ -94,3 +96,24 @@ Tahap ini dilakukan di dalam berkas `urls.py` di mana untuk setiap fungsi, akan 
 ![XML by ID viewer](images/xmlid_viewer.png)
 #### JSON by ID Viewer
 ![JSON by ID viewer](images/jsonid_viewer.png)
+
+
+## Tugas 4
+### Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
+`UserCreationForm` merupakan sistem autentikasi pengguna milik Django yang digunakan untuk melakukan registrasi terhadap pengguna-pengguna baru ke dalam sistem situs web. Sistem ini menyimpan data pengguna yang telah melakukan registrasi ke dalam database dan juga dapat melakukan validasi terhadap _username_ dan _password_ yang di-_input_ oleh pengguna.
+
+**Kelebihan** \
+Dengan `UserCreationForm` kita dapat membuat _form_ registrasi dengan lebih cepat dan mudah dengna fungsionalitas tanpa perlu melakukan pemrograman sendiri hanya dengan mengambil dari framework Django. Selain itu, keamanan _password_ secara umum sudah tertangani dengan mengukur kekuatan dari _password_ serta proses _hashing_ secara otomatis dilakukan oleh sistem.
+
+**Kekurangan** \
+Penambahan fitur-fitur registrasi yang baru seperti gambar atau deskripsi profil perlu dibuat lagi secara manual karena `UserCreationForm` hanya memberikan _fields_ untuk _password_, _username_, email, nama depan, dan nama belakang. Sistem form ini juga tidak menangani validasi yang lebih kompleks dan harus kita modifikasi atau membuat _form_ baru secara manual. Verifikasi email untuk meningkatkan keamanan ketika melakukan registrasi juga tidak dapat dilakukan oleh sistem ini.
+
+### Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+Autentikasi merupakan validasi data, seperti _username_ dan _password_, pengguna ketika ingin melakukan proses _login_ sedangkan otorisasi merupakan hal apa saja yang dapat dilakukan atau komponen apa saja yang dimiliki oleh pengguna yang telah melakukan registrasi tersebut. Keduanya sangat penting dalam segi keamanan di mana untuk autentikasi, data dan privasi pengguna dapat dijaga untuk mencegah adanya hal-hal buruk seperti kebocoran data. Otorisasi membeirkan batasan-batasan terhadap apa yang boleh dan tidak boleh diakses terhadap pengguna. Tanpa adanya proses otorisasi terlebih dahulu, pengguna dapat mengakses informasi-informasi atau data penting yang dapat mengancam suatu perusahaan, lembaga, atau organisasi bila disebarkan.
+
+### Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+_Cookies_ merupakan cara kita membuat sifat _stateless_ aplikasi web, yang menggunakan HTTP, menjadi _stateful_. Dengan perubahan sifat ini, situs web dapat mengingat informasi yang berada pada sisi klien untuk ditampilkan pada sesi-sesi penggunaan web berikutnya. Hal ini dapat terjadi karena _cookies_ akan mengirimkan informasi dari _web browser_ menuju _web browser_. Django menggunakan prinsip yang sama ketika menggunakan _cookies_ di mana setiap _cookie_ memiliki ID sesi (_session_ ID) yang unik untuk mengidentifikasi sesi yang tepat ketika aplikasi web terhubung dengan server. Isi data dari sesi tersebut disimpan ke dalam _database_ secara _default_, namun kita mengkonfigurasi Django agar dapat disimpan ke tempat yang lain.
+
+### Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+Penggunaan _cookies_ tetap dapat membeirkan risiko keamanan yang dapat mengancam data pribadi pengguna. Beberapa aplikasi web akan menyimpan sesi pada _cookies_ secara default dan ini mampu membuat web melihat data aktivitas kita. Hal ini biasanya dilakukan untuk membuat pengalaman pengguna yang lebih terpersonalisas, tetapi terdapat juga beberapa situs web yang mencuri data tersebut untuk tindakan kriminal seperti penjualan data.
+
