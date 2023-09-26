@@ -7,6 +7,24 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
+
+        <style>
+            .info-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .info-container > div {
+                width: 100%; /* Adjust the width as needed */
+                margin-right: 1px; /* Add spacing between divs */
+            }
+
+            .info-container h4,
+            .info-container p {
+                margin: 0;
+            }
+        </style>
+
         {% block meta %}
         {% endblock meta %}
     </head>

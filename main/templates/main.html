@@ -3,23 +3,31 @@
 {% block content %}
     <h1>Bicycle Inventory</h1>
 
-    <h4>Nama Aplikasi: </h4>
-    <p>{{ app_name }}</p>
 
-    <h4>Nama: </h4>
-    <p>{{ name }}</p>
+    <div class="info-container">
+        
+        <div>
+            <h4>Nama Aplikasi: </h4><p>{{ app_name }}</p>
+        </div>
+        
+        <div>
+            <h4>Nama: </h4><p>{{ name }}</p>
+        </div>
 
-    <h4>Kelas: </h4>
-    <p>{{ class }}</p>
+        <div>
+            <h4>Kelas: </h4><p>{{ class }}</p>
+        </div>
+
+    </div>
 
     <h3>Kamu telah menyimpan {{item_count}} buah barang dalam inventori</h3>
 
-    <table>
+    <table border="1">
         <tr>
             <th>Date Added</th>
             <th>Name</th>
-            <th>Amount</th>
-            <th>Price</th>
+            <th style="padding: 10px">Amount</th>
+            <th style="padding: 10px">Price</th>
             <th>Description</th>
         </tr>
 
