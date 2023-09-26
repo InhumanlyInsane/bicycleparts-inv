@@ -22,7 +22,7 @@ def show_main(request):
         'class': 'PBP F',
         'item_count': len(items),
         'items': items,
-        'last_login': request.COOKIES['last_login']
+        'last_login': request.COOKIES.get('last_login')
     }
 
     return render(request, "main.html", context)
@@ -62,7 +62,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your account has been successfully created!')
+            messages.success(request, 'Akun berhasil dibuat!')
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
@@ -78,7 +78,7 @@ def login_user(request):
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
         else:
-            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+            messages.info(request, 'Mohon maaf, username atau password yang dimasukkan salah. Mohon untuk dicoba lagi . . .')
     context = {}
     return render(request, 'login.html', context)
 
