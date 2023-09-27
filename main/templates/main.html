@@ -9,7 +9,7 @@
         <div>
             <h4>Nama Aplikasi: </h4><p>{{ app_name }}</p>
         </div>
-        
+
         <div>
             <h4>Nama: </h4><p>{{ name }}</p>
         </div>
@@ -27,6 +27,7 @@
             <th>Date Added</th>
             <th>Name</th>
             <th style="padding: 10px">Amount</th>
+            <th>Action</th>
             <th style="padding: 10px">Price</th>
             <th>Description</th>
         </tr>
@@ -38,6 +39,25 @@
                 <td>{{item.date_added}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.amount}}</td>
+                <td style="text-align: center; padding: 10px;">
+                    <a href="{% url 'main:increment_amount' id=item.id %}">
+                        <button style="margin: 3px;">
+                            Add One
+                        </button>
+                    </a>
+
+                    <a href="{% url 'main:decrement_amount' id=item.id %}">
+                        <button style="margin: 3px;">
+                            Remove One
+                        </button>
+                    </a>
+
+                    <a href="{% url 'main:remove_item' id=item.id %}">
+                        <button style="margin: 3px;">
+                            Remove Item
+                        </button>
+                    </a>
+                </td>
                 <td>{{item.price}}</td>
                 <td>{{item.description}}</td>
             </tr>

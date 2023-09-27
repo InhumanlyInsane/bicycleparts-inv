@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 @login_required(login_url='/login')
 # Create your views here.
@@ -87,3 +88,20 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def increment_amount(request, id):
+    data = Item.objects.filter(user=request.user).get(id=id)
+    data.amount += 1
+    data.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def decrement_amount(request,id):
+    data = Item.objects.filter(user=request.user).get(id=id)
+    data.amount -= 1
+    data.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def remove_item(request, id):
+    data = Item.objects.filter(user=request.user).get(id=id)
+    data.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
