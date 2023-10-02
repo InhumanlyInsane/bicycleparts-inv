@@ -57,6 +57,12 @@
                             Remove Item
                         </button>
                     </a>
+
+                    <a href="{% url 'main:edit_item' item.pk %}">
+                        <button>
+                            Edit
+                        </button>
+                    </a>
                 </td>
                 <td>{{item.price}}</td>
                 <td>{{item.description}}</td>
