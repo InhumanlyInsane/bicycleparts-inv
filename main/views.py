@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
+from django.views.generic import CreateView
 
 @login_required(login_url='/login')
 # Create your views here.
@@ -119,3 +120,7 @@ def edit_item(request, id):
 
     context = {'form': form}
     return render(request, "edit_item.html", context)
+
+class ItemCreateView(CreateView):
+    model = Item
+    fields = ('name', 'amount', 'price', 'description')
