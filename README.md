@@ -137,3 +137,29 @@ Saya memulai pengerjaan tahap ini dari berkas yang mengatur _model_ dari situs w
 Untuk menampilkan detail informasi _username_ pengguna yang sedang _logged in_, pada _dictionary_ `context` yang berada di dalam fungsi `show_main` di berkas `views.py`, saya mengubah _key_ `name` menjadi `request.user.username` yang mengambil atribut _username_ dari objek `User` yang sedang mengirimkan _request_ alias sedang _logged in_ ke dalam sistem. Kemudian, `context` akan di-_render_ oleh `main.html` yang akan menampilkan _username_ dan informasi pengguna yang lain.
 
 Penerapan `cookies` seperti `last login` pada halaman utama juga berasal dari _dictionary_ `context` pada fungsi `show_main`. _Cookie_ itu sendiri diperoleh ketika pengguna melakukan _login_ ke dalam aplikasi dan dari situ kita dapat memperoleh _cookies_ berupa `last_login` pengguna menggunakan `request.COOKIES.get('last_login')` yang akan mengambil semua _cookies_ dari permintaan pengguna dengan nama `last_login`. _Cookie_ tersebut kemudian akan di-_render_ pada `main.html` sama halnya dengan _username_ pengguna.
+
+## Tugas 5
+###  Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+1. Selector Elemen \
+Selector elemen digunakan untuk memilih semua elemen dengan tipe yang sama. Misalnya, `p` akan memilih semua elemen `<p>` di halaman HTML.
+2. Selector Kelas \
+Selector kelas digunakan untuk memilih elemen berdasarkan nilai atribut `class` yang telah diberikan pada elemen-elemen tersebut. Ini memungkinkan Anda untuk mengelompokkan dan memberikan gaya khusus pada elemen-elemen tertentu.
+3. Selector ID \
+Selector ID digunakan untuk memilih elemen berdasarkan nilai atribut `id` yang unik. Ini cocok untuk mengidentifikasi elemen tertentu dan memberikan gaya khusus.
+4. Selector Keturunan \
+Selector keturunan digunakan untuk memilih elemen yang merupakan keturunan atau anak dari elemen lain. Ini memungkinkan Anda mengkhususkan gaya pada elemen-elemen tertentu dalam struktur dokumen yang lebih besar.
+5. Selector Pseudo-class \
+Selector pseudo-class digunakan untuk memilih elemen berdasarkan kondisi tertentu, seperti keadaan mouse di atas elemen (`:hover`) atau elemen yang sedang dalam keadaan tertentu (`:checked`, `:first-child`).
+
+### Jelaskan HTML5 Tag yang kamu ketahui.
+1. `<main>`: digunakan untuk mengelompokkan konten utama dalam halaman web. Biasanya, satu halaman web hanya memiliki satu elemen `<main>`, dan akan berguna dalam membantu mesin pencari dan aksesibilitas untuk mengidentifikasi konten utama.
+2. `<aside>`: Untuk konten sampingan yang terkait dengan konten utama, seperti sidebar dengan widget atau iklan. Ini membantu memisahkan konten utama dari informasi tambahan.
+3. `<figure>`: Untuk menandai konten media, seperti gambar atau video, beserta elemen yang terkait seperti keterangan menggunakan tag `<figcaption>`.
+4. `<nav>`: Untuk menu navigasi utama, Anda juga bisa menggunakan tag `<nav>` untuk sub-menu atau menu navigasi lainnya dalam halaman.
+5. `<header>`: Tag ini digunakan untuk bagian atas halaman web, tag `<header>` juga dapat digunakan untuk mengelompokkan elemen-elemen header dalam bagian tertentu dari halaman.
+
+### Jelaskan perbedaan antara margin dan padding.
+Margin mengontrol jarak antara elemen dengan elemen-elemen lain di sekitarnya, sedangkan padding mengontrol jarak antara batas elemen dan kontennya sendiri.
+
+### Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Tailwind CSS dan Bootstrap adalah dua framework CSS yang memiliki filosofi desain dan pendekatan yang berbeda. Tailwind CSS mengadopsi pendekatan "utility-first" dengan kelas-kelas utilitas yang memungkinkan kustomisasi tinggi dan fleksibilitas dalam desain tampilan. Bootstrap, di sisi lain, mengikuti pendekatan "component-based" dengan menyediakan komponen-komponen siap pakai untuk pengembangan cepat. Tailwind CSS cenderung lebih kecil dalam ukuran file karena hanya memuat kelas yang diperlukan, sementara Bootstrap cenderung lebih besar karena menyertakan lebih banyak komponen dan gaya bawaan. Pilihan antara keduanya tergantung pada kebutuhan proyek, preferensi desain, dan tingkat kustomisasi yang diinginkan oleh pengembang.
