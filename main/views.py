@@ -19,14 +19,13 @@ def show_main(request):
 
     context = {
         'app_name': 'bicycleparts-inv',
-        'name': request.user.username,
-        'class': 'PBP F',
+        'name': "Username : " + request.user.username,
         'item_count': len(items),
         'items': items,
         'last_login': request.COOKIES.get('last_login')
     }
 
-    return render(request, "main.html", context)
+    return render(request, ["main.html", "base.html"], context)
 
 def create_item(request):
     form = ItemForm(request.POST or None)
@@ -119,4 +118,4 @@ def edit_item(request, id):
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
-    return render(request, "edit_product.html", context)
+    return render(request, "edit_item.html", context)

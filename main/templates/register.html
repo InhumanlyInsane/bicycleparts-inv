@@ -2,11 +2,94 @@
 
 {% block meta %}
     <title>Register</title>
+
+    <style>
+        .register {
+            border: 1px solid #ccc; /* Add a border */
+            padding: 20px;
+
+            background-color: #f9f9f9; /* Set a background color */
+            max-width: 800px; /* Limit the maximum width */
+            margin: 0 auto; /* Center the login div horizontally */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+            border-radius: 5px; /* Add rounded corners */
+            display: flex;
+            margin-top: 120px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group {
+            text-align: center;
+        }
+
+        .form-group button {
+            margin: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+
+
+
+        
+
+    </style>
 {% endblock meta %}
 
 {% block content %}  
 
-<div class = "login">
+    <div class="register">
+
+        <h1 style="padding: 10px;">Register</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-success">Daftar</button>
+            </div>
+        </form>
+
+        {% if messages %}
+            <ul class="alert alert-danger">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+    <!-- <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Register</h1>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Daftar</button>
+                            </div>
+                        </form>
+                        {% if messages %}
+                            <ul class="alert alert-danger">
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+<!-- <div class = "login">
     
     <h1>Register</h1>  
 
@@ -29,6 +112,6 @@
         </ul>   
     {% endif %}
 
-</div>  
+</div>   -->
 
 {% endblock content %}

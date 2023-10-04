@@ -1,89 +1,134 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>Bicycle Inventory</h1>
+{% block meta %}
+    <style>
 
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
 
-    <div class="info-container">
+        .info-container > div {
+            width: 100%;
+            margin-right: 1px;
+        }
+
+        .alert {
+            margin: 10px;
+            font-size: 20px;
+        }
+
+        .alert span {
+            font-weight: bolder;
+        }
+
+        .btn-group a button {
+            margin: 5px;
+        }
+
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 0px;
+        }
+
+        .card-deck .card {
+            margin-right: 5px;
+            margin-left: 5px;
+            margin-bottom: 0px;
+        }
+
+        .btn-new-item {
+            text-align: center;
+        }
+
+        .btn-new-item a {
+            font-size: 20px;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .btn-logout {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-logout a {
+            margin-right: 10px;
+            margin: 10px;
+        }
         
-        <div>
-            <h4>Nama Aplikasi: </h4><p>{{ app_name }}</p>
-        </div>
 
-        <div>
-            <h4>Nama: </h4><p>{{ name }}</p>
-        </div>
+    </style>
+{% endblock meta %}
 
-        <div>
-            <h4>Kelas: </h4><p>{{ class }}</p>
-        </div>
+{% block content %}
 
+    <div class="alert alert-info" role="alert">
+        Kamu telah menyimpan <span>{{ item_count }}</span> buah barang dalam inventori!    
     </div>
 
-    <h3>Kamu telah menyimpan {{item_count}} buah barang dalam inventori</h3>
-
-    <table border="1">
-        <tr>
-            <th>Date Added</th>
-            <th>Name</th>
-            <th style="padding: 10px">Amount</th>
-            <th>Action</th>
-            <th style="padding: 10px">Price</th>
-            <th>Description</th>
-        </tr>
-
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
+    <div class="card-deck d-flex justify-content-center">
         {% for item in items %}
-            <tr>
-                <td>{{item.date_added}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.amount}}</td>
-                <td style="text-align: center; padding: 10px;">
+        <div class="card border-dark mb-3 col-md-4" style="width: 490px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <div class="card-text">
+                    <p><b>Date Added: </b>{{ item.date_added }}</p>
+                    <p><b>Amount: </b>{{ item.amount }}</p>
+                    <p><b>Harga: </b>{{ item.price }}</p>
+                    <b>Description:</b>
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+
+            <div class="card-footer align-items-center d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <a href="{% url 'main:increment_amount' id=item.id %}">
-                        <button style="margin: 3px;">
+                        <button type="button" class="btn btn-outline-primary">
                             Add One
                         </button>
                     </a>
-
                     <a href="{% url 'main:decrement_amount' id=item.id %}">
-                        <button style="margin: 3px;">
+                        <button type="button" class="btn btn-outline-primary">
                             Remove One
                         </button>
                     </a>
-
                     <a href="{% url 'main:remove_item' id=item.id %}">
-                        <button style="margin: 3px;">
+                        <button type="button" class="btn btn-outline-primary">
                             Remove Item
                         </button>
                     </a>
-
                     <a href="{% url 'main:edit_item' item.pk %}">
-                        <button>
+                        <button type="button" class="btn btn-outline-primary">
                             Edit
                         </button>
                     </a>
-                </td>
-                <td>{{item.price}}</td>
-                <td>{{item.description}}</td>
-            </tr>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </table>
+    </div>
 
     <br />
 
-    <a href="{% url 'main:create_item' %}">
-        <button>
-            Add New Item
-        </button>
-    </a>
+    <div class="btn-new-item">
+        <a class="btn btn-primary" href="{% url 'main:create_item' %}" role="button"> Add New Item</a>
+    </div>
 
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    <!-- <div class="btn-logout">
+        <a class="btn btn-danger" href="{% url 'main:logout' %}" role="button">Logout</a>
+    </div> -->
 
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+    <div class="btn-logout">
+        <h5 style="margin: 10px;">Sesi terakhir login: {{ last_login }}</h5>
+        <a class="btn btn-danger" href="{% url 'main:logout' %}" role="button">Logout</a>
+    </div>
+
+
 
 {% endblock content %}
