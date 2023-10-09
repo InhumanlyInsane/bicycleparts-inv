@@ -27,20 +27,26 @@
             margin: 5px;
         }
 
-        .card {
-            margin-right: 7px;
-            margin-left: 7px;
-            margin-bottom: 0px;
+        #item_collection {
+            margin-right: 5px;
+            margin-left: 5px;
         }
 
-        .btn-new-item {
-            text-align: center;
-        }
-
-        .btn-new-item a {
+        /* .btn-new-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 20px;
             padding: 10px;
-            margin-bottom: 5px;
+            margin: 10px;
+        } */
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
         }
 
         .btn-logout {
@@ -63,8 +69,9 @@
         Kamu telah menyimpan <span>{{ item_count }}</span> buah barang dalam inventori!    
     </div>
 
-    <div class="row row-cols-3 row-cols-md-2 g-4">
-        {% for item in items %}
+    <!-- <div class="row row-cols-3 row-cols-md-2 g-4"> -->
+    <div id="item_collection" class="row row-cols-3 row-cols-md-2 g-4">
+        <!-- {% for item in items %}
         <div class="col-md-4">
             <div class="card h-100">
 
@@ -106,19 +113,120 @@
 
             </div>
         </div>
-        {% endfor %}
+        {% endfor %} -->
     </div>
 
     <br />
 
-    <div class="btn-new-item">
-        <a class="btn btn-primary" href="{% url 'main:create_item' %}" role="button"> Add New Item</a>
+    <!-- PEMBUATAN MODAL -->
+    <div class="modal fade" id="AddItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div>
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="center-container">
+        <button type="button" class="btn btn-primary btn-new-item" data-bs-toggle="modal" data-bs-target="#AddItemModal" style="font-weight: 500; 
+        font-size: 20px; padding: 10px;">Add Product</button>
+    </div>
+
+    <!-- <div class="btn-new-item">
+        <a class="btn btn-primary" href="{% url 'main:create_item' %}" role="button"> Add New Item</a>
+    </div> -->
 
     <div class="btn-logout">
         <h5 style="margin: 10px;">Sesi terakhir login: {{ last_login }}</h5>
         <a class="btn btn-danger" href="{% url 'main:logout' %}" role="button">Logout</a>
     </div>
 
+
+
+    <script>
+        
+        async function getItems(){
+            return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+        }
+
+        async function refreshItems(){
+            const itemCards = document.getElementById("item_collection");
+            itemCards.innerHTML = "";
+
+            const items = await getItems();
+            let htmlString = items.forEach((item) => {
+                const card = document.createElement("div");
+                card.classList.add("col-md-4");
+                card.innerHTML = `
+                <div class="card h-100 border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.fields.name}</h5>
+                        <div class="card-text">
+                            <p><b>Date Added: </b>${item.fields.date_added}</p>
+                            <p><b>Amount: </b>${item.fields.amount}</p>
+                            <p><b>Harga: </b>${item.fields.price}</p>
+                            <b>Description:</b>
+                            <p>${item.fields.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex align-items-center justify-content-center">
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn btn-outline-primary">
+                                Remove Item
+                            </button>
+                            <button type="button" class="btn btn-outline-primary">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+                itemCards.appendChild(card);
+            })
+        }
+
+        refreshItems();
+
+        function addItem(){
+            fetch("{% url 'main:add_item_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshItems);
+            
+            document.getElementById("form").reset();
+            return false;
+        }
+
+    </script>
 
 {% endblock content %}
