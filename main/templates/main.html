@@ -27,15 +27,6 @@
             margin: 5px;
         }
 
-        /* .card-deck {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch;
-            margin-left: 5px;
-            margin-right: 5px;
-            margin-bottom: 0px;
-        } */
-
         .card {
             margin-right: 7px;
             margin-left: 7px;
@@ -89,7 +80,6 @@
                 </div>
 
                 <div class="card-footer d-flex align-items-center justify-content-center">
-                <!-- <div class="card-footer align-items-center d-flex justify-content-center"> -->
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'main:increment_amount' id=item.id %}">
                             <button type="button" class="btn btn-outline-primary">
@@ -119,57 +109,11 @@
         {% endfor %}
     </div>
 
-    <!-- <div class="card-deck d-flex justify-content-center">
-        {% for item in items %}
-        <div class="card border-dark mb-3" style="width: 490px;">
-            <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <div class="card-text">
-                    <p><b>Date Added: </b>{{ item.date_added }}</p>
-                    <p><b>Amount: </b>{{ item.amount }}</p>
-                    <p><b>Harga: </b>{{ item.price }}</p>
-                    <b>Description:</b>
-                    <p>{{ item.description }}</p>
-                </div>
-            </div>
-
-            <div class="card-footer align-items-center d-flex justify-content-center">
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <a href="{% url 'main:increment_amount' id=item.id %}">
-                        <button type="button" class="btn btn-outline-primary">
-                            Add One
-                        </button>
-                    </a>
-                    <a href="{% url 'main:decrement_amount' id=item.id %}">
-                        <button type="button" class="btn btn-outline-primary">
-                            Remove One
-                        </button>
-                    </a>
-                    <a href="{% url 'main:remove_item' id=item.id %}">
-                        <button type="button" class="btn btn-outline-primary">
-                            Remove Item
-                        </button>
-                    </a>
-                    <a href="{% url 'main:edit_item' item.pk %}">
-                        <button type="button" class="btn btn-outline-primary">
-                            Edit
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div> -->
-
     <br />
 
     <div class="btn-new-item">
         <a class="btn btn-primary" href="{% url 'main:create_item' %}" role="button"> Add New Item</a>
     </div>
-
-    <!-- <div class="btn-logout">
-        <a class="btn btn-danger" href="{% url 'main:logout' %}" role="button">Logout</a>
-    </div> -->
 
     <div class="btn-logout">
         <h5 style="margin: 10px;">Sesi terakhir login: {{ last_login }}</h5>
