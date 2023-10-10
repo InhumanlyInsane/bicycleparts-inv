@@ -163,3 +163,12 @@ Margin mengontrol jarak antara elemen dengan elemen-elemen lain di sekitarnya, s
 
 ### Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
 Tailwind CSS dan Bootstrap adalah dua framework CSS yang memiliki filosofi desain dan pendekatan yang berbeda. Tailwind CSS mengadopsi pendekatan "utility-first" dengan kelas-kelas utilitas yang memungkinkan kustomisasi tinggi dan fleksibilitas dalam desain tampilan. Bootstrap, di sisi lain, mengikuti pendekatan "component-based" dengan menyediakan komponen-komponen siap pakai untuk pengembangan cepat. Tailwind CSS cenderung lebih kecil dalam ukuran file karena hanya memuat kelas yang diperlukan, sementara Bootstrap cenderung lebih besar karena menyertakan lebih banyak komponen dan gaya bawaan. Pilihan antara keduanya tergantung pada kebutuhan proyek, preferensi desain, dan tingkat kustomisasi yang diinginkan oleh pengembang.
+
+## Tugas 6
+### Jelaskan perbedaan antara _asynchronous programming_ dengan _synchronous programming_.
+Pada _synchronous programming_, setiap proses pemrograman yang terjadi akan berjalan secara _sequential_ atau baris per baris. Hal ini dapat mengakibatkan terjadinya penghentian berjalannya program sebelum suatu proses diselesaikan terlebih dahulu. Beda dengan _asynchronous programming_, proses-proses pemrograman dapat berjalan secara bersamaan tanpa interupsi dari proses lainnya yang berada pada program. Tentunya, proses _asynchronous_ akan memiliki kecepatan yang lebih daripada _synchronous_.
+
+### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma _event-driven programming_. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+_Event driven programming_ merupakan suatu paradigma pemrograman yang men-_trigger_ suatu _event_ oleh aksi nyata dari pengguna seperti melakukan klik pada mouse atau penekanan tombol pada keyboard. Salah satu contoh digunakannya _event-driven programming_ pada tugas ini dapat dilihat pada penggunaan tombol `Add Product` pada berkas `main.html` di mana jika pengguna melakukan klik terhadap tombol tersebut, maka suatu _event_ akan terjadi yaitu pembukaan formulir modal.
+
+### Jelaskan penerapan asynchronous programming pada AJAX.
