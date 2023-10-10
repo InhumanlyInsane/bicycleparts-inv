@@ -171,4 +171,8 @@ Pada _synchronous programming_, setiap proses pemrograman yang terjadi akan berj
 ### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma _event-driven programming_. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
 _Event driven programming_ merupakan suatu paradigma pemrograman yang men-_trigger_ suatu _event_ oleh aksi nyata dari pengguna seperti melakukan klik pada mouse atau penekanan tombol pada keyboard. Salah satu contoh digunakannya _event-driven programming_ pada tugas ini dapat dilihat pada penggunaan tombol `Add Product` pada berkas `main.html` di mana jika pengguna melakukan klik terhadap tombol tersebut, maka suatu _event_ akan terjadi yaitu pembukaan formulir modal.
 
-### Jelaskan penerapan asynchronous programming pada AJAX.
+### Jelaskan penerapan _asynchronous programming_ pada AJAX.
+AJAX merupakan suatu cara baru untuk menggunakan bahasa JavaScript di mana proses dijalankan oleh JavaScript dapat menjadi _asynchronous_. Dengan menggunakan AJAX, _request_ JavaScript tidak butuh menunggu suatu respons untuk melanjutkan programnya dan dalam hal tersebut proses _asynchronous programming_ terjadi. Hal ini dapat membuat aplikasi web yang lebih responsif selama respons yang lain sedang diproses.
+
+### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada _library_ jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
