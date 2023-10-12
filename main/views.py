@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound, JsonResponse
 from main.forms import ItemForm
 from main.models import Item
 from django.urls import reverse
@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 @login_required(login_url='/login')
 # Create your views here.
@@ -123,7 +124,7 @@ def edit_item(request, id):
 
 # AJAX FUNCTIONS
 def get_item_json(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user=request.user).all()
     return HttpResponse(serializers.serialize('json', items))
 
 @csrf_exempt
@@ -141,3 +142,19 @@ def add_item_ajax(request):
         return HttpResponse(b"CREATED", status=201)
 
     return HttpResponseNotFound()
+
+@csrf_exempt
+@require_http_methods(['DELETE'])
+def remove_item_ajax(request, id):
+    data = Item.objects.filter(user=request.user).filter(id=id)
+    data.delete()
+    return HttpResponse(b"DELETED", status=200)
+
+    # try:
+    #     item = Item.objects.get(pk=id)
+    #     item.delete()
+    #     return JsonResponse({'status': 'success', 'message': 'Item deleted successfully'})
+    # except Item.DoesNotExist:
+    #     return JsonResponse({'status': 'error', 'message': 'Item not found'}, status=404)
+
+    # if request.method == 'DELETE':

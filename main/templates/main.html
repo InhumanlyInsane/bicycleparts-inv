@@ -65,9 +65,11 @@
 
 {% block content %}
 
-    <div class="alert alert-info" role="alert">
+    <div id="amount_info"></div>
+
+    <!-- <div class="alert alert-info" role="alert" id="alert">
         Kamu telah menyimpan <span>{{ item_count }}</span> buah barang dalam inventori!    
-    </div>
+    </div> -->
 
     <!-- <div class="row row-cols-3 row-cols-md-2 g-4"> -->
     <div id="item_collection" class="row row-cols-3 row-cols-md-2 g-4">
@@ -123,7 +125,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -149,7 +151,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Item</button>
                 </div>
             </div>
         </div>
@@ -157,12 +159,8 @@
 
     <div class="center-container">
         <button type="button" class="btn btn-primary btn-new-item" data-bs-toggle="modal" data-bs-target="#AddItemModal" style="font-weight: 500; 
-        font-size: 20px; padding: 10px;">Add Product</button>
+        font-size: 20px; padding: 10px;">Add Item</button>
     </div>
-
-    <!-- <div class="btn-new-item">
-        <a class="btn btn-primary" href="{% url 'main:create_item' %}" role="button"> Add New Item</a>
-    </div> -->
 
     <div class="btn-logout">
         <h5 style="margin: 10px;">Sesi terakhir login: {{ last_login }}</h5>
@@ -178,11 +176,20 @@
         }
 
         async function refreshItems(){
+            const items = await getItems();
+            const amountInfo = document.getElementById("amount_info")
             const itemCards = document.getElementById("item_collection");
+            amountInfo.innerHTML = "";
             itemCards.innerHTML = "";
 
-            const items = await getItems();
-            let htmlString = items.forEach((item) => {
+            let htmlString = `
+                <div class="alert alert-info" role="alert">
+                    Kamu telah menyimpan <span>${items.length}</span> buah barang dalam inventori!
+                </div>
+            `;
+            document.getElementById("amount_info").innerHTML = htmlString;
+            
+            items.forEach((item) => {
                 const card = document.createElement("div");
                 card.classList.add("col-md-4");
                 card.innerHTML = `
@@ -200,7 +207,7 @@
 
                     <div class="card-footer d-flex align-items-center justify-content-center">
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <button type="button" class="btn btn-outline-primary">
+                            <button type="button" class="btn btn-outline-danger button_remove" data-id=${item.pk}>
                                 Remove Item
                             </button>
                             <button type="button" class="btn btn-outline-primary">
@@ -212,7 +219,8 @@
                 `;
 
                 itemCards.appendChild(card);
-            })
+
+            })            
         }
 
         refreshItems();
@@ -221,11 +229,32 @@
             fetch("{% url 'main:add_item_ajax' %}", {
                 method: "POST",
                 body: new FormData(document.querySelector('#form'))
-            }).then(refreshItems);
+            }).then(refreshItems)
             
             document.getElementById("form").reset();
             return false;
         }
+
+        function removeItem(id) {
+            fetch(`remove-item-ajax/${id}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok){
+                    refreshItems();
+                } else {
+                    console.error('Failed to delete item')
+                }
+            })
+        }
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('button_remove')) {
+                let itemId = e.target.getAttribute('data-id');
+                removeItem(itemId);
+            }
+        });
+
+        document.getElementById("button_add").onclick = addItem;
 
     </script>
 

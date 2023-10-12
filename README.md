@@ -175,4 +175,3 @@ _Event driven programming_ merupakan suatu paradigma pemrograman yang men-_trigg
 AJAX merupakan suatu cara baru untuk menggunakan bahasa JavaScript di mana proses dijalankan oleh JavaScript dapat menjadi _asynchronous_. Dengan menggunakan AJAX, _request_ JavaScript tidak butuh menunggu suatu respons untuk melanjutkan programnya dan dalam hal tersebut proses _asynchronous programming_ terjadi. Hal ini dapat membuat aplikasi web yang lebih responsif selama respons yang lain sedang diproses.
 
 ### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada _library_ jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
-
