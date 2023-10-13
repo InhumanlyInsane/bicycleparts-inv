@@ -189,7 +189,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="button_edit" data-bs-dismiss="modal">Edit Item</button>
+                    <button type="button" class="btn btn-primary" id="button_edit" data-bs-dismiss="modal" data-id="">Edit Item</button>
                 </div>
             </div>
         </div>
@@ -257,6 +257,12 @@
                 </div>
                 `;
 
+                const editButton = card.querySelector(".btn-iter-edit")
+                const editModalButton = document.getElementById("button_edit")
+                editButton.addEventListener("click", function() {
+                    editModalButton.setAttribute("data-id", item.pk)
+                })
+
                 itemCards.appendChild(card);
 
             })            
@@ -268,7 +274,7 @@
         function editItem(id) {
             fetch(`edit-item-ajax/${id}/`, {
                 method: 'POST',
-                body: new FormData(document.querySelector('#formAdd'))
+                body: new FormData(document.querySelector('#formEdit'))
             }).then(refreshItems);
 
             document.getElementById("formEdit").reset();
@@ -304,12 +310,13 @@
             }
         });
 
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('btn-iter-edit')) {
-                let itemId = e.target.getAttribute('data-id');
-                document.getElementById("button_edit").onclick = editItem(itemId);
-            }
+        document.getElementById("button_edit").addEventListener("click", function () {
+            const itemId = this.getAttribute("data-id");
+            editItem(itemId);
+
+            this.setAttribute("data-id", "");
         });
+
 
         document.getElementById("button_add").onclick = addItem;
 
