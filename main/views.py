@@ -150,11 +150,13 @@ def remove_item_ajax(request, id):
     data.delete()
     return HttpResponse(b"DELETED", status=200)
 
-    # try:
-    #     item = Item.objects.get(pk=id)
-    #     item.delete()
-    #     return JsonResponse({'status': 'success', 'message': 'Item deleted successfully'})
-    # except Item.DoesNotExist:
-    #     return JsonResponse({'status': 'error', 'message': 'Item not found'}, status=404)
-
-    # if request.method == 'DELETE':
+@csrf_exempt
+@require_http_methods(['POST'])
+def edit_item_ajax(request, id):
+    data = Item.objects.filter(user=request.user).get(id=id)
+    form = ItemForm(request.POST or None, instance=data)
+    if form.is_valid():
+        form.save()
+        return HttpResponse(b"SUCCESS", status=200)
+    
+    return HttpResponseNotFound()

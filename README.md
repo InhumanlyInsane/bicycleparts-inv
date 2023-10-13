@@ -1,9 +1,7 @@
-Link : https://bicycleinv-app.adaptable.app/main/
-
-## Nama    : Vincent Suhardi
-## NPM     : 2206082505
-## Kelas   : PBP F
-
+Link : https://vincent-suhardi-tugas.pbp.cs.ui.ac.id \
+Nama    : Vincent Suhardi \
+NPM     : 2206082505 \
+Kelas   : PBP F
 
 ## Tugas 2
 ### Jelaskan bagaimana cara kamu mengimplementasikan __checklist__ di atas secara __step-by-step__ (bukan hanya sekedar mengikuti tutorial).

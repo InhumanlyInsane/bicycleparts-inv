@@ -120,16 +120,16 @@
 
     <br />
 
-    <!-- PEMBUATAN MODAL -->
-    <div class="modal fade" id="AddItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- MODAL ADD ITEM -->
+    <div class="modal fade" id="AddItemModal" tabindex="-1" aria-labelledby="AddModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                    <h1 class="modal-title fs-5" id="AddModalLabel">Add New Item</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form" onsubmit="return false;">
+                    <form id="formAdd" onsubmit="return false;">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="name" class="col-form-label">Name:</label>
@@ -156,6 +156,45 @@
             </div>
         </div>
     </div>
+
+
+    <!-- MODAL EDIT ITEM -->
+    <div class="modal fade" id="EditItemModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="EditModalLabel">Edit Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdit" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div>
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_edit" data-bs-dismiss="modal">Edit Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="center-container">
         <button type="button" class="btn btn-primary btn-new-item" data-bs-toggle="modal" data-bs-target="#AddItemModal" style="font-weight: 500; 
@@ -210,7 +249,7 @@
                             <button type="button" class="btn btn-outline-danger button_remove" data-id=${item.pk}>
                                 Remove Item
                             </button>
-                            <button type="button" class="btn btn-outline-primary">
+                            <button type="button" class="btn btn-outline-primary btn-iter-edit" data-bs-toggle="modal" data-bs-target="#EditItemModal" data-id=${item.pk}>
                                 Edit
                             </button>
                         </div>
@@ -225,13 +264,24 @@
 
         refreshItems();
 
+
+        function editItem(id) {
+            fetch(`edit-item-ajax/${id}/`, {
+                method: 'POST',
+                body: new FormData(document.querySelector('#formAdd'))
+            }).then(refreshItems);
+
+            document.getElementById("formEdit").reset();
+            return false;
+        }
+
         function addItem(){
             fetch("{% url 'main:add_item_ajax' %}", {
                 method: "POST",
-                body: new FormData(document.querySelector('#form'))
+                body: new FormData(document.querySelector('#formAdd'))
             }).then(refreshItems)
             
-            document.getElementById("form").reset();
+            document.getElementById("formAdd").reset();
             return false;
         }
 
@@ -251,6 +301,13 @@
             if (e.target && e.target.classList.contains('button_remove')) {
                 let itemId = e.target.getAttribute('data-id');
                 removeItem(itemId);
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('btn-iter-edit')) {
+                let itemId = e.target.getAttribute('data-id');
+                document.getElementById("button_edit").onclick = editItem(itemId);
             }
         });
 
